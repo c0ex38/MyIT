@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "myit"
+version = "0.0.1"
+description = "Portable IT Management Toolbox"
+requires-python = ">=3.11"
+dependencies = [
+    "PySide6>=6.8,<7.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
