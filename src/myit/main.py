@@ -7,14 +7,15 @@ import sys
 
 from PySide6.QtWidgets import QApplication
 
+from myit.core.version import APP_NAME, __version__
 from myit.ui.main_window import MainWindow
 
 
 def main():
     """Uygulamayı başlatır ve ana pencereyi görüntüler."""
     app = QApplication(sys.argv)
-    app.setApplicationName("MyIT")
-    app.setApplicationVersion("0.0.2")
+    app.setApplicationName(APP_NAME)
+    app.setApplicationVersion(__version__)
 
     window = MainWindow()
     window.show()

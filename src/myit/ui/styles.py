@@ -22,8 +22,10 @@ THEMES: Dict[str, Dict[str, str]] = {
         "secondary_accent": "#38BDF8",
         "selected_bg": "#1E2C45",
         "footer_bg": "#0B1220",
-        "icon_color": "#94A3B8",
-        "icon_active": "#38BDF8",
+        "input_bg": "#0F1A2C",
+        "console_bg": "#080E18",
+        "danger": "#EF4444",
+        "danger_hover": "#DC2626",
     },
     "light": {
         "name": "Açık",
@@ -39,8 +41,10 @@ THEMES: Dict[str, Dict[str, str]] = {
         "secondary_accent": "#0284C7",
         "selected_bg": "#E5EEFF",
         "footer_bg": "#FFFFFF",
-        "icon_color": "#53657D",
-        "icon_active": "#1D4ED8",
+        "input_bg": "#F8FAFD",
+        "console_bg": "#FFFFFF",
+        "danger": "#DC2626",
+        "danger_hover": "#B91C1C",
     },
 }
 
@@ -197,6 +201,129 @@ QPushButton#CardActionBtn:hover {{
 QPushButton#CardActionBtn:pressed {{
     background-color: {t["accent_hover"]};
     color: #FFFFFF;
+}}
+
+/* Ağ Araçları ve Ping Arayüzü */
+QFrame#PingControlCard {{
+    background-color: {t["surface"]};
+    border: 1px solid {t["border"]};
+    border-radius: 10px;
+}}
+
+QLineEdit#PingInput {{
+    background-color: {t["input_bg"]};
+    color: {t["text_primary"]};
+    border: 1px solid {t["border"]};
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-family: 'Segoe UI', sans-serif;
+}}
+
+QLineEdit#PingInput:focus {{
+    border: 1px solid {t["secondary_accent"]};
+}}
+
+QComboBox#PingCombo {{
+    background-color: {t["input_bg"]};
+    color: {t["text_primary"]};
+    border: 1px solid {t["border"]};
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-size: 13px;
+    font-family: 'Segoe UI', sans-serif;
+}}
+
+QPushButton#PingStartBtn {{
+    background-color: {t["accent"]};
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Segoe UI', sans-serif;
+}}
+
+QPushButton#PingStartBtn:hover {{
+    background-color: {t["accent_hover"]};
+}}
+
+QPushButton#PingStartBtn:disabled {{
+    background-color: {t["border"]};
+    color: {t["text_secondary"]};
+}}
+
+QPushButton#PingStopBtn {{
+    background-color: {t["danger"]};
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Segoe UI', sans-serif;
+}}
+
+QPushButton#PingStopBtn:hover {{
+    background-color: {t["danger_hover"]};
+}}
+
+QPushButton#PingStopBtn:disabled {{
+    background-color: {t["border"]};
+    color: {t["text_secondary"]};
+}}
+
+QPushButton#PingClearBtn {{
+    background-color: transparent;
+    color: {t["text_secondary"]};
+    border: 1px solid {t["border"]};
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-family: 'Segoe UI', sans-serif;
+}}
+
+QPushButton#PingClearBtn:hover {{
+    background-color: {t["surface_hover"]};
+    color: {t["text_primary"]};
+}}
+
+QLabel#PingFeedbackLabel {{
+    color: {t["text_secondary"]};
+    font-size: 12px;
+    font-family: 'Segoe UI', sans-serif;
+}}
+
+/* Ping İstatistik Paneli */
+QFrame#PingStatsFrame {{
+    background-color: {t["surface"]};
+    border: 1px solid {t["border"]};
+    border-radius: 8px;
+}}
+
+QLabel#StatTitle {{
+    color: {t["text_secondary"]};
+    font-size: 12px;
+    font-family: 'Segoe UI', sans-serif;
+}}
+
+QLabel#StatValue {{
+    color: {t["secondary_accent"]};
+    font-size: 13px;
+    font-weight: bold;
+    font-family: 'Segoe UI', sans-serif;
+}}
+
+/* Canlı Konsol Çıktısı */
+QPlainTextEdit#PingConsole {{
+    background-color: {t["console_bg"]};
+    color: {t["text_primary"]};
+    border: 1px solid {t["border"]};
+    border-radius: 8px;
+    padding: 10px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 12px;
 }}
 
 /* Yer Tutucu (Placeholder) Sayfalar */

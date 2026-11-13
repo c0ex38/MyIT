@@ -1,11 +1,12 @@
 """MyIT ana pencere bileşeni.
 
 Bu modül; sol sidebar, sayfa yığını (QStackedWidget) ve alt durum çubuğunu
-birleştirerek v0.0.2 Midnight Blue arayüzünü oluşturur.
+birleştirerek v0.1.0 arayüzünü oluşturur.
 """
 
 from typing import Dict
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QCloseEvent
 from PySide6.QtWidgets import (
     QFrame,
     QHBoxLayout,
@@ -16,7 +17,9 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
+from myit.core.version import APP_TITLE, __version__
 from myit.ui.dashboard import DashboardView
+from myit.ui.pages.network_page import NetworkPage
 from myit.ui.sidebar import Sidebar
 from myit.ui.styles import get_stylesheet
 from myit.ui.theme_manager import ThemeManager
@@ -67,11 +70,11 @@ class PlaceholderView(QWidget):
 
 
 class MainWindow(QMainWindow):
-    """MyIT v0.0.2 Ana Penceresi."""
+    """MyIT Ana Penceresi."""
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("MyIT — IT Management Toolbox")
+        self.setWindowTitle(APP_TITLE)
         self.resize(1150, 750)
         self.setMinimumSize(900, 600)
 
@@ -81,6 +84,7 @@ class MainWindow(QMainWindow):
 
         # Sayfa eşleştirme sözlüğü (page_id -> QStackedWidget indeksi)
         self._page_indices: Dict[str, int] = {}
+        self.network_page: NetworkPage = None
 
         self._init_ui()
         self._apply_theme()
@@ -126,9 +130,13 @@ class MainWindow(QMainWindow):
         idx_dash = self.stacked_widget.addWidget(dashboard)
         self._page_indices["dashboard"] = idx_dash
 
-        # 2. Diğer Sayfalar (Yer Tutucu)
+        # 2. Ağ Araçları (Gerçek Ping Modülü)
+        self.network_page = NetworkPage(parent=self)
+        idx_net = self.stacked_widget.addWidget(self.network_page)
+        self._page_indices["network"] = idx_net
+
+        # 3. Diğer Sayfalar (Yer Tutucu)
         pages = [
-            ("network", "Ağ Araçları", "Ping, cihaz keşfi, port tarama ve ağ teşhisi"),
             ("hardware", "Donanım", "Sistem donanım bileşenleri, CPU, RAM ve disk bilgileri"),
             ("windows", "Windows Yönetimi", "Windows servisleri, teşhis araçları ve hızlı komutlar"),
             ("tools", "Yardımcı Araçlar", "Sistem temizliği, hızlı notlar ve genel destek araçları"),
@@ -170,7 +178,7 @@ class MainWindow(QMainWindow):
         footer_layout.addWidget(sep)
 
         # Sürüm etiketi
-        lbl_version = QLabel("v0.0.2")
+        lbl_version = QLabel(f"v{__version__}")
         lbl_version.setObjectName("FooterVersionLabel")
         footer_layout.addWidget(lbl_version)
 
@@ -199,3 +207,9 @@ class MainWindow(QMainWindow):
         """Mevcut temanın QSS stilini tüm pencereye uygular."""
         qss = get_stylesheet(self.theme_manager.current_theme)
         self.setStyleSheet(qss)
+
+    def closeEvent(self, event: QCloseEvent):
+        """Pencere kapatıldığında arka planda çalışan süreçleri sonlandırır."""
+        if self.network_page:
+            self.network_page.cleanup()
+        super().closeEvent(event)
