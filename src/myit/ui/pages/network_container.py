@@ -1,6 +1,6 @@
 """MyIT Ağ Araçları ana sayfası.
 
-Bu modül; 'Ping Teşhisi' ve 'Ağ Keşfi' modüllerini tek bir
+Bu modül; 'Ping Teşhisi', 'Ağ Cihaz Keşfi' ve 'Port Tarayıcı' modüllerini tek bir
 QTabWidget altında sekmeler halinde birleştirir.
 """
 
@@ -9,10 +9,11 @@ from PySide6.QtWidgets import QTabWidget, QVBoxLayout, QWidget
 
 from myit.ui.pages.discovery_page import DiscoveryPage
 from myit.ui.pages.network_page import NetworkPage
+from myit.ui.pages.port_scan_page import PortScanPage
 
 
 class NetworkToolsContainer(QWidget):
-    """Ağ Araçları konteyner sayfası (Ping & Ağ Keşfi sekmeleri)."""
+    """Ağ Araçları konteyner sayfası (Ping, Ağ Keşfi ve Port Tarayıcı sekmeleri)."""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -24,13 +25,21 @@ class NetworkToolsContainer(QWidget):
         self.tab_widget = QTabWidget()
         self.tab_widget.setObjectName("NetworkTabWidget")
 
-        # 1. Ping Sekmesi
+        # 1. Hızlı Ping Sekmesi
         self.ping_page = NetworkPage(parent=self)
         self.tab_widget.addTab(self.ping_page, "Hızlı Ping")
 
-        # 2. Ağ Keşfi Sekmesi
-        self.discovery_page = DiscoveryPage(on_send_to_ping=self.set_ping_target, parent=self)
+        # 2. Ağ Cihaz Keşfi Sekmesi
+        self.discovery_page = DiscoveryPage(
+            on_send_to_ping=self.set_ping_target,
+            on_send_to_port_scan=self.set_port_scan_target,
+            parent=self,
+        )
         self.tab_widget.addTab(self.discovery_page, "Ağ Cihaz Keşfi")
+
+        # 3. Port Tarayıcı Sekmesi
+        self.port_scan_page = PortScanPage(parent=self)
+        self.tab_widget.addTab(self.port_scan_page, "Port Tarayıcı")
 
         layout.addWidget(self.tab_widget)
 
@@ -40,9 +49,16 @@ class NetworkToolsContainer(QWidget):
         self.tab_widget.setCurrentIndex(0)
         self.ping_page.lbl_feedback.setText(f"Hedef {target_ip} Ping aracına aktarıldı. 'Başlat'a basabilirsiniz.")
 
+    def set_port_scan_target(self, target_ip: str):
+        """Ağ keşfinden seçilen bir IP'yi Port Tarayıcıya aktarır ve sekmeyi açar (otomatik başlatmaz)."""
+        self.port_scan_page.set_target(target_ip)
+        self.tab_widget.setCurrentIndex(2)
+
     def cleanup(self):
         """Pencere kapanırken aktif alt süreçleri sonlandırır."""
         if hasattr(self, "ping_page") and self.ping_page:
             self.ping_page.cleanup()
         if hasattr(self, "discovery_page") and self.discovery_page:
             self.discovery_page.cleanup()
+        if hasattr(self, "port_scan_page") and self.port_scan_page:
+            self.port_scan_page.cleanup()

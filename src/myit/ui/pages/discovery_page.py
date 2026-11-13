@@ -35,9 +35,15 @@ from myit.modules.network.discovery_service import (
 class DiscoveryPage(QWidget):
     """Ağ Keşfi arayüz sayfası."""
 
-    def __init__(self, on_send_to_ping: Optional[Callable[[str], None]] = None, parent=None):
+    def __init__(
+        self,
+        on_send_to_ping: Optional[Callable[[str], None]] = None,
+        on_send_to_port_scan: Optional[Callable[[str], None]] = None,
+        parent=None,
+    ):
         super().__init__(parent)
         self.on_send_to_ping = on_send_to_ping
+        self.on_send_to_port_scan = on_send_to_port_scan
 
         self._adapters: List[NetworkAdapterInfo] = []
         self._thread: Optional[QThread] = None
@@ -45,7 +51,6 @@ class DiscoveryPage(QWidget):
 
         # Bulunan cihazları hafızada tut (RAM only)
         self._all_devices: List[DiscoveredDevice] = []
-        self._device_rows: Dict[str, int] = {}
 
         self._init_ui()
         self.refresh_adapters()
@@ -166,7 +171,7 @@ class DiscoveryPage(QWidget):
         # 4. Sonuç Tablosu
         self.table = QTableWidget(0, 6)
         self.table.setObjectName("DiscoveryTable")
-        self.table.setHorizontalHeaderLabels(["IP Adresi", "Hostname (DNS)", "MAC Adresi", "Durum", "Gecikme (ms)", "Eylem"])
+        self.table.setHorizontalHeaderLabels(["IP Adresi", "Hostname (DNS)", "MAC Adresi", "Durum", "Gecikme (ms)", "Eylemler"])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
         self.table.horizontalHeader().setStretchLastSection(True)
         self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
@@ -289,18 +294,36 @@ class DiscoveryPage(QWidget):
         lat_text = f"{device.latency} ms" if device.latency is not None else "-"
         self.table.setItem(row, 4, QTableWidgetItem(lat_text))
 
-        # Ping Butonu
-        btn_ping = QPushButton("Ping Gönder")
+        # Eylem Butonları Paneli (Ping ve Port Tara)
+        action_widget = QWidget()
+        action_layout = QHBoxLayout(action_widget)
+        action_layout.setContentsMargins(4, 2, 4, 2)
+        action_layout.setSpacing(6)
+
+        btn_ping = QPushButton("Ping")
         btn_ping.setObjectName("TablePingBtn")
         btn_ping.setCursor(Qt.CursorShape.PointingHandCursor)
         target_ip = device.ip
         btn_ping.clicked.connect(lambda checked=False, tip=target_ip: self._send_to_ping(tip))
-        self.table.setCellWidget(row, 5, btn_ping)
+        action_layout.addWidget(btn_ping)
+
+        btn_port = QPushButton("Port Tara")
+        btn_port.setObjectName("TablePortBtn")
+        btn_port.setCursor(Qt.CursorShape.PointingHandCursor)
+        btn_port.clicked.connect(lambda checked=False, tip=target_ip: self._send_to_port_scan(tip))
+        action_layout.addWidget(btn_port)
+
+        self.table.setCellWidget(row, 5, action_widget)
 
     def _send_to_ping(self, target_ip: str):
-        """Seçili cihazın IP'sini ana penceredeki Ping aracına aktarır."""
+        """Seçili cihazın IP'sini Ping aracına aktarır."""
         if self.on_send_to_ping:
             self.on_send_to_ping(target_ip)
+
+    def _send_to_port_scan(self, target_ip: str):
+        """Seçili cihazın IP'sini Port Tarayıcı aracına aktarır (otomatik tarama başlatmaz)."""
+        if self.on_send_to_port_scan:
+            self.on_send_to_port_scan(target_ip)
 
     def _on_progress(self, current: int, total: int):
         """İlerleme çubuğunu günceller."""

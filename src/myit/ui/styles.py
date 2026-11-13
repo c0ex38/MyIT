@@ -229,8 +229,8 @@ QPushButton#CardActionBtn:hover {{
     color: #FFFFFF;
 }}
 
-/* Ağ Araçları ve Ping Arayüzü */
-QFrame#PingControlCard, QFrame#DiscoveryControlCard {{
+/* Kontrol Kartları */
+QFrame#PingControlCard, QFrame#DiscoveryControlCard, QFrame#PortControlCard {{
     background-color: {t["surface"]};
     border: 1px solid {t["border"]};
     border-radius: 10px;
@@ -249,7 +249,14 @@ QLabel#DiscoveryNoticeLabel {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QLineEdit#PingInput, QLineEdit#DiscoveryInput {{
+QLabel#PortSummaryLabel {{
+    color: {t["secondary_accent"]};
+    font-size: 13px;
+    font-weight: bold;
+    font-family: 'Segoe UI', sans-serif;
+}}
+
+QLineEdit#PingInput, QLineEdit#DiscoveryInput, QLineEdit#PortInput {{
     background-color: {t["input_bg"]};
     color: {t["text_primary"]};
     border: 1px solid {t["border"]};
@@ -259,8 +266,24 @@ QLineEdit#PingInput, QLineEdit#DiscoveryInput {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QLineEdit#PingInput:focus, QLineEdit#DiscoveryInput:focus {{
+QLineEdit#PingInput:focus, QLineEdit#DiscoveryInput:focus, QLineEdit#PortInput:focus {{
     border: 1px solid {t["secondary_accent"]};
+}}
+
+QDoubleSpinBox#PortTimeoutSpin {{
+    background-color: {t["input_bg"]};
+    color: {t["text_primary"]};
+    border: 1px solid {t["border"]};
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 13px;
+    font-family: 'Segoe UI', sans-serif;
+}}
+
+QRadioButton#PortRadio {{
+    color: {t["text_primary"]};
+    font-size: 12px;
+    font-family: 'Segoe UI', sans-serif;
 }}
 
 QComboBox#PingCombo, QComboBox#DiscoveryCombo {{
@@ -273,7 +296,7 @@ QComboBox#PingCombo, QComboBox#DiscoveryCombo {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingStartBtn, QPushButton#DiscoveryStartBtn {{
+QPushButton#PingStartBtn, QPushButton#DiscoveryStartBtn, QPushButton#PortStartBtn {{
     background-color: {t["accent"]};
     color: #FFFFFF;
     border: none;
@@ -284,16 +307,16 @@ QPushButton#PingStartBtn, QPushButton#DiscoveryStartBtn {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingStartBtn:hover, QPushButton#DiscoveryStartBtn:hover {{
+QPushButton#PingStartBtn:hover, QPushButton#DiscoveryStartBtn:hover, QPushButton#PortStartBtn:hover {{
     background-color: {t["accent_hover"]};
 }}
 
-QPushButton#PingStartBtn:disabled, QPushButton#DiscoveryStartBtn:disabled {{
+QPushButton#PingStartBtn:disabled, QPushButton#DiscoveryStartBtn:disabled, QPushButton#PortStartBtn:disabled {{
     background-color: {t["border"]};
     color: {t["text_secondary"]};
 }}
 
-QPushButton#PingStopBtn, QPushButton#DiscoveryStopBtn {{
+QPushButton#PingStopBtn, QPushButton#DiscoveryStopBtn, QPushButton#PortStopBtn {{
     background-color: {t["danger"]};
     color: #FFFFFF;
     border: none;
@@ -304,16 +327,16 @@ QPushButton#PingStopBtn, QPushButton#DiscoveryStopBtn {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingStopBtn:hover, QPushButton#DiscoveryStopBtn:hover {{
+QPushButton#PingStopBtn:hover, QPushButton#DiscoveryStopBtn:hover, QPushButton#PortStopBtn:hover {{
     background-color: {t["danger_hover"]};
 }}
 
-QPushButton#PingStopBtn:disabled, QPushButton#DiscoveryStopBtn:disabled {{
+QPushButton#PingStopBtn:disabled, QPushButton#DiscoveryStopBtn:disabled, QPushButton#PortStopBtn:disabled {{
     background-color: {t["border"]};
     color: {t["text_secondary"]};
 }}
 
-QPushButton#PingClearBtn, QPushButton#DiscoveryClearBtn, QPushButton#DiscoveryRefreshBtn {{
+QPushButton#PingClearBtn, QPushButton#DiscoveryClearBtn, QPushButton#DiscoveryRefreshBtn, QPushButton#PortClearBtn {{
     background-color: transparent;
     color: {t["text_secondary"]};
     border: 1px solid {t["border"]};
@@ -323,12 +346,12 @@ QPushButton#PingClearBtn, QPushButton#DiscoveryClearBtn, QPushButton#DiscoveryRe
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingClearBtn:hover, QPushButton#DiscoveryClearBtn:hover, QPushButton#DiscoveryRefreshBtn:hover {{
+QPushButton#PingClearBtn:hover, QPushButton#DiscoveryClearBtn:hover, QPushButton#DiscoveryRefreshBtn:hover, QPushButton#PortClearBtn:hover {{
     background-color: {t["surface_hover"]};
     color: {t["text_primary"]};
 }}
 
-QLabel#PingFeedbackLabel, QLabel#DiscoveryStatusLabel {{
+QLabel#PingFeedbackLabel, QLabel#DiscoveryStatusLabel, QLabel#PortStatusLabel {{
     color: {t["text_secondary"]};
     font-size: 12px;
     font-family: 'Segoe UI', sans-serif;
@@ -377,17 +400,17 @@ QTableWidget#DiscoveryTable QHeaderView::section {{
     font-weight: 600;
 }}
 
-QPushButton#TablePingBtn {{
+QPushButton#TablePingBtn, QPushButton#TablePortBtn {{
     background-color: transparent;
     color: {t["secondary_accent"]};
     border: 1px solid {t["secondary_accent"]};
     border-radius: 4px;
-    padding: 4px 10px;
+    padding: 4px 8px;
     font-size: 11px;
     font-weight: 500;
 }}
 
-QPushButton#TablePingBtn:hover {{
+QPushButton#TablePingBtn:hover, QPushButton#TablePortBtn:hover {{
     background-color: {t["secondary_accent"]};
     color: #FFFFFF;
 }}
