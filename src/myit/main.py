@@ -1,27 +1,22 @@
+"""MyIT - IT Destek & Sistem Yönetim Paneli.
+
+Uygulamanın ana giriş noktasıdır.
+"""
+
 import sys
 
-from PySide6.QtWidgets import QApplication, QLabel, QMainWindow
-from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QApplication
 
-
-class MyITWindow(QMainWindow):
-    def __init__(self):
-        super().__init__()
-
-        self.setWindowTitle("MyIT - v0.0.1")
-        self.resize(1000, 650)
-        self.setMinimumSize(800, 500)
-
-        label = QLabel("MyIT\nPortable IT Management Toolbox")
-        label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.setCentralWidget(label)
+from myit.ui.main_window import MainWindow
 
 
 def main():
+    """Uygulamayı başlatır ve ana pencereyi görüntüler."""
     app = QApplication(sys.argv)
+    app.setApplicationName("MyIT")
+    app.setApplicationVersion("0.0.2")
 
-    window = MyITWindow()
+    window = MainWindow()
     window.show()
 
     sys.exit(app.exec())
