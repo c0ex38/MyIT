@@ -26,6 +26,8 @@ THEMES: Dict[str, Dict[str, str]] = {
         "console_bg": "#080E18",
         "danger": "#EF4444",
         "danger_hover": "#DC2626",
+        "table_header_bg": "#101A2B",
+        "table_row_alt": "#121C2D",
     },
     "light": {
         "name": "Açık",
@@ -45,6 +47,8 @@ THEMES: Dict[str, Dict[str, str]] = {
         "console_bg": "#FFFFFF",
         "danger": "#DC2626",
         "danger_hover": "#B91C1C",
+        "table_header_bg": "#EDF2F9",
+        "table_row_alt": "#F9FAFC",
     },
 }
 
@@ -155,6 +159,33 @@ QLabel#PageHeaderSubtitle {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
+/* QTabWidget (Ağ Araçları alt sekmeleri) */
+QTabWidget::pane {{
+    border: none;
+    background-color: transparent;
+}}
+
+QTabBar::tab {{
+    background-color: transparent;
+    color: {t["text_secondary"]};
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'Segoe UI', sans-serif;
+}}
+
+QTabBar::tab:hover {{
+    color: {t["text_primary"]};
+}}
+
+QTabBar::tab:selected {{
+    color: {t["secondary_accent"]};
+    border-bottom: 2px solid {t["secondary_accent"]};
+    font-weight: 600;
+}}
+
 /* Dashboard Kartları */
 QFrame#DashboardCard {{
     background-color: {t["surface"]};
@@ -198,19 +229,27 @@ QPushButton#CardActionBtn:hover {{
     color: #FFFFFF;
 }}
 
-QPushButton#CardActionBtn:pressed {{
-    background-color: {t["accent_hover"]};
-    color: #FFFFFF;
-}}
-
 /* Ağ Araçları ve Ping Arayüzü */
-QFrame#PingControlCard {{
+QFrame#PingControlCard, QFrame#DiscoveryControlCard {{
     background-color: {t["surface"]};
     border: 1px solid {t["border"]};
     border-radius: 10px;
 }}
 
-QLineEdit#PingInput {{
+QLabel#FieldLabel {{
+    color: {t["text_primary"]};
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'Segoe UI', sans-serif;
+}}
+
+QLabel#DiscoveryNoticeLabel {{
+    color: {t["secondary_accent"]};
+    font-size: 12px;
+    font-family: 'Segoe UI', sans-serif;
+}}
+
+QLineEdit#PingInput, QLineEdit#DiscoveryInput {{
     background-color: {t["input_bg"]};
     color: {t["text_primary"]};
     border: 1px solid {t["border"]};
@@ -220,11 +259,11 @@ QLineEdit#PingInput {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QLineEdit#PingInput:focus {{
+QLineEdit#PingInput:focus, QLineEdit#DiscoveryInput:focus {{
     border: 1px solid {t["secondary_accent"]};
 }}
 
-QComboBox#PingCombo {{
+QComboBox#PingCombo, QComboBox#DiscoveryCombo {{
     background-color: {t["input_bg"]};
     color: {t["text_primary"]};
     border: 1px solid {t["border"]};
@@ -234,7 +273,7 @@ QComboBox#PingCombo {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingStartBtn {{
+QPushButton#PingStartBtn, QPushButton#DiscoveryStartBtn {{
     background-color: {t["accent"]};
     color: #FFFFFF;
     border: none;
@@ -245,16 +284,16 @@ QPushButton#PingStartBtn {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingStartBtn:hover {{
+QPushButton#PingStartBtn:hover, QPushButton#DiscoveryStartBtn:hover {{
     background-color: {t["accent_hover"]};
 }}
 
-QPushButton#PingStartBtn:disabled {{
+QPushButton#PingStartBtn:disabled, QPushButton#DiscoveryStartBtn:disabled {{
     background-color: {t["border"]};
     color: {t["text_secondary"]};
 }}
 
-QPushButton#PingStopBtn {{
+QPushButton#PingStopBtn, QPushButton#DiscoveryStopBtn {{
     background-color: {t["danger"]};
     color: #FFFFFF;
     border: none;
@@ -265,16 +304,16 @@ QPushButton#PingStopBtn {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingStopBtn:hover {{
+QPushButton#PingStopBtn:hover, QPushButton#DiscoveryStopBtn:hover {{
     background-color: {t["danger_hover"]};
 }}
 
-QPushButton#PingStopBtn:disabled {{
+QPushButton#PingStopBtn:disabled, QPushButton#DiscoveryStopBtn:disabled {{
     background-color: {t["border"]};
     color: {t["text_secondary"]};
 }}
 
-QPushButton#PingClearBtn {{
+QPushButton#PingClearBtn, QPushButton#DiscoveryClearBtn, QPushButton#DiscoveryRefreshBtn {{
     background-color: transparent;
     color: {t["text_secondary"]};
     border: 1px solid {t["border"]};
@@ -284,15 +323,73 @@ QPushButton#PingClearBtn {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingClearBtn:hover {{
+QPushButton#PingClearBtn:hover, QPushButton#DiscoveryClearBtn:hover, QPushButton#DiscoveryRefreshBtn:hover {{
     background-color: {t["surface_hover"]};
     color: {t["text_primary"]};
 }}
 
-QLabel#PingFeedbackLabel {{
+QLabel#PingFeedbackLabel, QLabel#DiscoveryStatusLabel {{
     color: {t["text_secondary"]};
     font-size: 12px;
     font-family: 'Segoe UI', sans-serif;
+}}
+
+/* İlerleme Çubuğu (QProgressBar) */
+QProgressBar#DiscoveryProgressBar {{
+    background-color: {t["surface"]};
+    border: 1px solid {t["border"]};
+    border-radius: 6px;
+    text-align: center;
+    color: {t["text_primary"]};
+    font-size: 11px;
+    font-weight: 600;
+    height: 18px;
+}}
+
+QProgressBar#DiscoveryProgressBar::chunk {{
+    background-color: {t["accent"]};
+    border-radius: 5px;
+}}
+
+QCheckBox#DiscoveryFilterCheck {{
+    color: {t["text_secondary"]};
+    font-size: 12px;
+    font-family: 'Segoe UI', sans-serif;
+}}
+
+/* Sonuç Tablosu (QTableWidget) */
+QTableWidget#DiscoveryTable {{
+    background-color: {t["surface"]};
+    color: {t["text_primary"]};
+    border: 1px solid {t["border"]};
+    border-radius: 8px;
+    gridline-color: {t["border"]};
+    font-size: 13px;
+    font-family: 'Segoe UI', sans-serif;
+}}
+
+QTableWidget#DiscoveryTable QHeaderView::section {{
+    background-color: {t["table_header_bg"]};
+    color: {t["text_primary"]};
+    border: none;
+    border-bottom: 1px solid {t["border"]};
+    padding: 8px;
+    font-weight: 600;
+}}
+
+QPushButton#TablePingBtn {{
+    background-color: transparent;
+    color: {t["secondary_accent"]};
+    border: 1px solid {t["secondary_accent"]};
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 500;
+}}
+
+QPushButton#TablePingBtn:hover {{
+    background-color: {t["secondary_accent"]};
+    color: #FFFFFF;
 }}
 
 /* Ping İstatistik Paneli */

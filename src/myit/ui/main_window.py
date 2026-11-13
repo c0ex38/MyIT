@@ -1,7 +1,7 @@
 """MyIT ana pencere bileşeni.
 
 Bu modül; sol sidebar, sayfa yığını (QStackedWidget) ve alt durum çubuğunu
-birleştirerek v0.1.0 arayüzünü oluşturur.
+birleştirerek v0.1.1 arayüzünü oluşturur.
 """
 
 from typing import Dict
@@ -19,7 +19,7 @@ from PySide6.QtWidgets import (
 
 from myit.core.version import APP_TITLE, __version__
 from myit.ui.dashboard import DashboardView
-from myit.ui.pages.network_page import NetworkPage
+from myit.ui.pages.network_container import NetworkToolsContainer
 from myit.ui.sidebar import Sidebar
 from myit.ui.styles import get_stylesheet
 from myit.ui.theme_manager import ThemeManager
@@ -84,7 +84,7 @@ class MainWindow(QMainWindow):
 
         # Sayfa eşleştirme sözlüğü (page_id -> QStackedWidget indeksi)
         self._page_indices: Dict[str, int] = {}
-        self.network_page: NetworkPage = None
+        self.network_container: NetworkToolsContainer = None
 
         self._init_ui()
         self._apply_theme()
@@ -130,9 +130,9 @@ class MainWindow(QMainWindow):
         idx_dash = self.stacked_widget.addWidget(dashboard)
         self._page_indices["dashboard"] = idx_dash
 
-        # 2. Ağ Araçları (Gerçek Ping Modülü)
-        self.network_page = NetworkPage(parent=self)
-        idx_net = self.stacked_widget.addWidget(self.network_page)
+        # 2. Ağ Araçları (Ping ve Ağ Keşfi Konteyneri)
+        self.network_container = NetworkToolsContainer(parent=self)
+        idx_net = self.stacked_widget.addWidget(self.network_container)
         self._page_indices["network"] = idx_net
 
         # 3. Diğer Sayfalar (Yer Tutucu)
@@ -210,6 +210,6 @@ class MainWindow(QMainWindow):
 
     def closeEvent(self, event: QCloseEvent):
         """Pencere kapatıldığında arka planda çalışan süreçleri sonlandırır."""
-        if self.network_page:
-            self.network_page.cleanup()
+        if self.network_container:
+            self.network_container.cleanup()
         super().closeEvent(event)
