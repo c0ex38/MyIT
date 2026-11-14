@@ -1,7 +1,7 @@
 """MyIT Ağ Araçları ana sayfası.
 
-Bu modül; 'Hızlı Ping', 'Ağ Cihaz Keşfi', 'Port Tarayıcı' ve 'DNS Araçları'
-modüllerini tek bir QTabWidget altında sekmeler halinde birleştirir.
+Bu modül; 'Hızlı Ping', 'Ağ Cihaz Keşfi', 'Port Tarayıcı', 'DNS Araçları'
+ve 'Traceroute' modüllerini tek bir QTabWidget altında sekmeler halinde birleştirir.
 """
 
 from typing import Optional
@@ -11,10 +11,11 @@ from myit.ui.pages.discovery_page import DiscoveryPage
 from myit.ui.pages.dns_page import DnsPage
 from myit.ui.pages.network_page import NetworkPage
 from myit.ui.pages.port_scan_page import PortScanPage
+from myit.ui.pages.traceroute_page import TraceroutePage
 
 
 class NetworkToolsContainer(QWidget):
-    """Ağ Araçları konteyner sayfası (Ping, Keşif, Port Tarama ve DNS sekmeleri)."""
+    """Ağ Araçları konteyner sayfası (Ping, Keşif, Port Tarama, DNS ve Traceroute sekmeleri)."""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -46,6 +47,10 @@ class NetworkToolsContainer(QWidget):
         self.dns_page = DnsPage(parent=self)
         self.tab_widget.addTab(self.dns_page, "DNS Araçları")
 
+        # 5. Traceroute Sekmesi
+        self.traceroute_page = TraceroutePage(parent=self)
+        self.tab_widget.addTab(self.traceroute_page, "Traceroute")
+
         layout.addWidget(self.tab_widget)
 
     def set_ping_target(self, target_ip: str):
@@ -59,6 +64,11 @@ class NetworkToolsContainer(QWidget):
         self.port_scan_page.set_target(target_ip)
         self.tab_widget.setCurrentIndex(2)
 
+    def set_traceroute_target(self, target_ip: str):
+        """Herhangi bir sekmeden Traceroute sekmesine hedef aktarır."""
+        self.traceroute_page.set_target(target_ip)
+        self.tab_widget.setCurrentIndex(4)
+
     def cleanup(self):
         """Pencere kapanırken tüm sekmelerdeki aktif alt süreçleri sonlandırır."""
         if hasattr(self, "ping_page") and self.ping_page:
@@ -69,3 +79,5 @@ class NetworkToolsContainer(QWidget):
             self.port_scan_page.cleanup()
         if hasattr(self, "dns_page") and self.dns_page:
             self.dns_page.cleanup()
+        if hasattr(self, "traceroute_page") and self.traceroute_page:
+            self.traceroute_page.cleanup()

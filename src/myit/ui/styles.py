@@ -170,7 +170,7 @@ QTabBar::tab {{
     color: {t["text_secondary"]};
     border: none;
     border-bottom: 2px solid transparent;
-    padding: 8px 18px;
+    padding: 8px 16px;
     font-size: 13px;
     font-weight: 500;
     font-family: 'Segoe UI', sans-serif;
@@ -230,7 +230,7 @@ QPushButton#CardActionBtn:hover {{
 }}
 
 /* Kontrol Kartları */
-QFrame#PingControlCard, QFrame#DiscoveryControlCard, QFrame#PortControlCard, QFrame#DnsControlCard {{
+QFrame#PingControlCard, QFrame#DiscoveryControlCard, QFrame#PortControlCard, QFrame#DnsControlCard, QFrame#TraceControlCard {{
     background-color: {t["surface"]};
     border: 1px solid {t["border"]};
     border-radius: 10px;
@@ -256,7 +256,7 @@ QLabel#PortSummaryLabel {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QLineEdit#PingInput, QLineEdit#DiscoveryInput, QLineEdit#PortInput, QLineEdit#DnsInput {{
+QLineEdit#PingInput, QLineEdit#DiscoveryInput, QLineEdit#PortInput, QLineEdit#DnsInput, QLineEdit#TraceInput {{
     background-color: {t["input_bg"]};
     color: {t["text_primary"]};
     border: 1px solid {t["border"]};
@@ -266,11 +266,11 @@ QLineEdit#PingInput, QLineEdit#DiscoveryInput, QLineEdit#PortInput, QLineEdit#Dn
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QLineEdit#PingInput:focus, QLineEdit#DiscoveryInput:focus, QLineEdit#PortInput:focus, QLineEdit#DnsInput:focus {{
+QLineEdit#PingInput:focus, QLineEdit#DiscoveryInput:focus, QLineEdit#PortInput:focus, QLineEdit#DnsInput:focus, QLineEdit#TraceInput:focus {{
     border: 1px solid {t["secondary_accent"]};
 }}
 
-QDoubleSpinBox#PortTimeoutSpin {{
+QDoubleSpinBox#PortTimeoutSpin, QSpinBox#TraceSpin {{
     background-color: {t["input_bg"]};
     color: {t["text_primary"]};
     border: 1px solid {t["border"]};
@@ -286,7 +286,7 @@ QRadioButton#PortRadio {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QComboBox#PingCombo, QComboBox#DiscoveryCombo, QComboBox#DnsCombo {{
+QComboBox#PingCombo, QComboBox#DiscoveryCombo, QComboBox#DnsCombo, QComboBox#TraceCombo {{
     background-color: {t["input_bg"]};
     color: {t["text_primary"]};
     border: 1px solid {t["border"]};
@@ -296,7 +296,7 @@ QComboBox#PingCombo, QComboBox#DiscoveryCombo, QComboBox#DnsCombo {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingStartBtn, QPushButton#DiscoveryStartBtn, QPushButton#PortStartBtn, QPushButton#DnsQueryBtn {{
+QPushButton#PingStartBtn, QPushButton#DiscoveryStartBtn, QPushButton#PortStartBtn, QPushButton#DnsQueryBtn, QPushButton#TraceStartBtn {{
     background-color: {t["accent"]};
     color: #FFFFFF;
     border: none;
@@ -307,16 +307,16 @@ QPushButton#PingStartBtn, QPushButton#DiscoveryStartBtn, QPushButton#PortStartBt
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingStartBtn:hover, QPushButton#DiscoveryStartBtn:hover, QPushButton#PortStartBtn:hover, QPushButton#DnsQueryBtn:hover {{
+QPushButton#PingStartBtn:hover, QPushButton#DiscoveryStartBtn:hover, QPushButton#PortStartBtn:hover, QPushButton#DnsQueryBtn:hover, QPushButton#TraceStartBtn:hover {{
     background-color: {t["accent_hover"]};
 }}
 
-QPushButton#PingStartBtn:disabled, QPushButton#DiscoveryStartBtn:disabled, QPushButton#PortStartBtn:disabled, QPushButton#DnsQueryBtn:disabled {{
+QPushButton#PingStartBtn:disabled, QPushButton#DiscoveryStartBtn:disabled, QPushButton#PortStartBtn:disabled, QPushButton#DnsQueryBtn:disabled, QPushButton#TraceStartBtn:disabled {{
     background-color: {t["border"]};
     color: {t["text_secondary"]};
 }}
 
-QPushButton#PingStopBtn, QPushButton#DiscoveryStopBtn, QPushButton#PortStopBtn, QPushButton#DnsStopBtn {{
+QPushButton#PingStopBtn, QPushButton#DiscoveryStopBtn, QPushButton#PortStopBtn, QPushButton#DnsStopBtn, QPushButton#TraceStopBtn {{
     background-color: {t["danger"]};
     color: #FFFFFF;
     border: none;
@@ -327,16 +327,16 @@ QPushButton#PingStopBtn, QPushButton#DiscoveryStopBtn, QPushButton#PortStopBtn, 
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingStopBtn:hover, QPushButton#DiscoveryStopBtn:hover, QPushButton#PortStopBtn:hover, QPushButton#DnsStopBtn:hover {{
+QPushButton#PingStopBtn:hover, QPushButton#DiscoveryStopBtn:hover, QPushButton#PortStopBtn:hover, QPushButton#DnsStopBtn:hover, QPushButton#TraceStopBtn:hover {{
     background-color: {t["danger_hover"]};
 }}
 
-QPushButton#PingStopBtn:disabled, QPushButton#DiscoveryStopBtn:disabled, QPushButton#PortStopBtn:disabled, QPushButton#DnsStopBtn:disabled {{
+QPushButton#PingStopBtn:disabled, QPushButton#DiscoveryStopBtn:disabled, QPushButton#PortStopBtn:disabled, QPushButton#DnsStopBtn:disabled, QPushButton#TraceStopBtn:disabled {{
     background-color: {t["border"]};
     color: {t["text_secondary"]};
 }}
 
-QPushButton#PingClearBtn, QPushButton#DiscoveryClearBtn, QPushButton#DiscoveryRefreshBtn, QPushButton#PortClearBtn, QPushButton#DnsClearBtn {{
+QPushButton#PingClearBtn, QPushButton#DiscoveryClearBtn, QPushButton#DiscoveryRefreshBtn, QPushButton#PortClearBtn, QPushButton#DnsClearBtn, QPushButton#TraceClearBtn {{
     background-color: transparent;
     color: {t["text_secondary"]};
     border: 1px solid {t["border"]};
@@ -346,12 +346,12 @@ QPushButton#PingClearBtn, QPushButton#DiscoveryClearBtn, QPushButton#DiscoveryRe
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingClearBtn:hover, QPushButton#DiscoveryClearBtn:hover, QPushButton#DiscoveryRefreshBtn:hover, QPushButton#PortClearBtn:hover, QPushButton#DnsClearBtn:hover {{
+QPushButton#PingClearBtn:hover, QPushButton#DiscoveryClearBtn:hover, QPushButton#DiscoveryRefreshBtn:hover, QPushButton#PortClearBtn:hover, QPushButton#DnsClearBtn:hover, QPushButton#TraceClearBtn:hover {{
     background-color: {t["surface_hover"]};
     color: {t["text_primary"]};
 }}
 
-QLabel#PingFeedbackLabel, QLabel#DiscoveryStatusLabel, QLabel#PortStatusLabel, QLabel#DnsStatusLabel {{
+QLabel#PingFeedbackLabel, QLabel#DiscoveryStatusLabel, QLabel#PortStatusLabel, QLabel#DnsStatusLabel, QLabel#TraceStatusLabel {{
     color: {t["text_secondary"]};
     font-size: 12px;
     font-family: 'Segoe UI', sans-serif;

@@ -14,6 +14,7 @@ python -m myit.main
 ```
 
 ## Sürüm Notları
+- **v0.1.4:** Ağ Araçları modülüne **Traceroute (Güzergah Analizi)** eklendi. Hedefe giden ağ paketlerinin geçtiği yönlendiricileri (hop), gecikme sürelerini (3 RTT) canlı tabloda listeleme, IPv4/IPv6 modu, ayarlanabilir hop ve zaman aşımı limitleri ile güvenli asenkron analiz desteği getirildi.
 - **v0.1.3:** Ağ Araçları modülüne **DNS Araçları** eklendi. Sistem varsayılanı veya özel DNS sunucusu üzerinden A, AAAA, MX, NS, TXT, CNAME, SOA ve Tümü kayıt türlerini asenkron sorgulama, TTL/ek bilgi gösterimi ve durum paneli getirildi.
 - **v0.1.2:** Ağ Araçları modülüne **TCP Port Tarayıcı** eklendi. Standart connect() ile tek hedef üzerinde hazır (24 yaygın port) veya özel port listeleri/aralıkları (maks. 256 port) tarama, canlı durum ve gecikme tablosu, filtreleme ve Ağ Keşfi listesinden hedef aktarma desteği getirildi.
 - **v0.1.1:** Ağ Araçları modülüne **Yerel Ağ Keşfi (Network Discovery)** eklendi. Aktif ağ bağdaştırıcısı tespiti, otomatik CIDR hesaplama, eşzamanlı ICMP ping taraması, canlı sonuç tablosu (IP, DNS Hostname, MAC adresi, durum, gecikme) ve bulunan cihaza doğrudan Ping gönderme desteği getirildi.
