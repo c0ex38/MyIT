@@ -4,11 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "myit"
-version = "0.1.2"
+version = "0.1.3"
 description = "Portable IT Management Toolbox"
 requires-python = ">=3.11"
 dependencies = [
-    "PySide6>=6.8,<7.0"
+    "PySide6>=6.8,<7.0",
+    "dnspython>=2.7.0,<3.0.0"
 ]
 
 [tool.setuptools.packages.find]

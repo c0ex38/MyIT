@@ -1,19 +1,20 @@
 """MyIT Ağ Araçları ana sayfası.
 
-Bu modül; 'Ping Teşhisi', 'Ağ Cihaz Keşfi' ve 'Port Tarayıcı' modüllerini tek bir
-QTabWidget altında sekmeler halinde birleştirir.
+Bu modül; 'Hızlı Ping', 'Ağ Cihaz Keşfi', 'Port Tarayıcı' ve 'DNS Araçları'
+modüllerini tek bir QTabWidget altında sekmeler halinde birleştirir.
 """
 
 from typing import Optional
 from PySide6.QtWidgets import QTabWidget, QVBoxLayout, QWidget
 
 from myit.ui.pages.discovery_page import DiscoveryPage
+from myit.ui.pages.dns_page import DnsPage
 from myit.ui.pages.network_page import NetworkPage
 from myit.ui.pages.port_scan_page import PortScanPage
 
 
 class NetworkToolsContainer(QWidget):
-    """Ağ Araçları konteyner sayfası (Ping, Ağ Keşfi ve Port Tarayıcı sekmeleri)."""
+    """Ağ Araçları konteyner sayfası (Ping, Keşif, Port Tarama ve DNS sekmeleri)."""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -41,6 +42,10 @@ class NetworkToolsContainer(QWidget):
         self.port_scan_page = PortScanPage(parent=self)
         self.tab_widget.addTab(self.port_scan_page, "Port Tarayıcı")
 
+        # 4. DNS Araçları Sekmesi
+        self.dns_page = DnsPage(parent=self)
+        self.tab_widget.addTab(self.dns_page, "DNS Araçları")
+
         layout.addWidget(self.tab_widget)
 
     def set_ping_target(self, target_ip: str):
@@ -55,10 +60,12 @@ class NetworkToolsContainer(QWidget):
         self.tab_widget.setCurrentIndex(2)
 
     def cleanup(self):
-        """Pencere kapanırken aktif alt süreçleri sonlandırır."""
+        """Pencere kapanırken tüm sekmelerdeki aktif alt süreçleri sonlandırır."""
         if hasattr(self, "ping_page") and self.ping_page:
             self.ping_page.cleanup()
         if hasattr(self, "discovery_page") and self.discovery_page:
             self.discovery_page.cleanup()
         if hasattr(self, "port_scan_page") and self.port_scan_page:
             self.port_scan_page.cleanup()
+        if hasattr(self, "dns_page") and self.dns_page:
+            self.dns_page.cleanup()

@@ -7,6 +7,17 @@ from myit.modules.network.discovery_service import (
     get_network_adapters,
     validate_cidr,
 )
+from myit.modules.network.dns_service import (
+    SUPPORTED_RECORD_TYPES,
+    DnsQueryWorker,
+    DnsRecordItem,
+    DnsQueryResult,
+    create_resolver,
+    format_rdata_item,
+    query_single_type,
+    validate_dns_server,
+    validate_domain,
+)
 from myit.modules.network.ping_service import PingStatistics, PingWorker, validate_target
 from myit.modules.network.port_scan_service import (
     COMMON_PORTS,
@@ -34,4 +45,13 @@ __all__ = [
     "get_known_service_name",
     "parse_port_expression",
     "scan_single_tcp_port",
+    "SUPPORTED_RECORD_TYPES",
+    "DnsRecordItem",
+    "DnsQueryResult",
+    "DnsQueryWorker",
+    "create_resolver",
+    "format_rdata_item",
+    "query_single_type",
+    "validate_dns_server",
+    "validate_domain",
 ]

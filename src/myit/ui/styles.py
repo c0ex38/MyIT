@@ -230,7 +230,7 @@ QPushButton#CardActionBtn:hover {{
 }}
 
 /* Kontrol Kartları */
-QFrame#PingControlCard, QFrame#DiscoveryControlCard, QFrame#PortControlCard {{
+QFrame#PingControlCard, QFrame#DiscoveryControlCard, QFrame#PortControlCard, QFrame#DnsControlCard {{
     background-color: {t["surface"]};
     border: 1px solid {t["border"]};
     border-radius: 10px;
@@ -256,7 +256,7 @@ QLabel#PortSummaryLabel {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QLineEdit#PingInput, QLineEdit#DiscoveryInput, QLineEdit#PortInput {{
+QLineEdit#PingInput, QLineEdit#DiscoveryInput, QLineEdit#PortInput, QLineEdit#DnsInput {{
     background-color: {t["input_bg"]};
     color: {t["text_primary"]};
     border: 1px solid {t["border"]};
@@ -266,7 +266,7 @@ QLineEdit#PingInput, QLineEdit#DiscoveryInput, QLineEdit#PortInput {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QLineEdit#PingInput:focus, QLineEdit#DiscoveryInput:focus, QLineEdit#PortInput:focus {{
+QLineEdit#PingInput:focus, QLineEdit#DiscoveryInput:focus, QLineEdit#PortInput:focus, QLineEdit#DnsInput:focus {{
     border: 1px solid {t["secondary_accent"]};
 }}
 
@@ -286,7 +286,7 @@ QRadioButton#PortRadio {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QComboBox#PingCombo, QComboBox#DiscoveryCombo {{
+QComboBox#PingCombo, QComboBox#DiscoveryCombo, QComboBox#DnsCombo {{
     background-color: {t["input_bg"]};
     color: {t["text_primary"]};
     border: 1px solid {t["border"]};
@@ -296,7 +296,7 @@ QComboBox#PingCombo, QComboBox#DiscoveryCombo {{
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingStartBtn, QPushButton#DiscoveryStartBtn, QPushButton#PortStartBtn {{
+QPushButton#PingStartBtn, QPushButton#DiscoveryStartBtn, QPushButton#PortStartBtn, QPushButton#DnsQueryBtn {{
     background-color: {t["accent"]};
     color: #FFFFFF;
     border: none;
@@ -307,16 +307,16 @@ QPushButton#PingStartBtn, QPushButton#DiscoveryStartBtn, QPushButton#PortStartBt
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingStartBtn:hover, QPushButton#DiscoveryStartBtn:hover, QPushButton#PortStartBtn:hover {{
+QPushButton#PingStartBtn:hover, QPushButton#DiscoveryStartBtn:hover, QPushButton#PortStartBtn:hover, QPushButton#DnsQueryBtn:hover {{
     background-color: {t["accent_hover"]};
 }}
 
-QPushButton#PingStartBtn:disabled, QPushButton#DiscoveryStartBtn:disabled, QPushButton#PortStartBtn:disabled {{
+QPushButton#PingStartBtn:disabled, QPushButton#DiscoveryStartBtn:disabled, QPushButton#PortStartBtn:disabled, QPushButton#DnsQueryBtn:disabled {{
     background-color: {t["border"]};
     color: {t["text_secondary"]};
 }}
 
-QPushButton#PingStopBtn, QPushButton#DiscoveryStopBtn, QPushButton#PortStopBtn {{
+QPushButton#PingStopBtn, QPushButton#DiscoveryStopBtn, QPushButton#PortStopBtn, QPushButton#DnsStopBtn {{
     background-color: {t["danger"]};
     color: #FFFFFF;
     border: none;
@@ -327,16 +327,16 @@ QPushButton#PingStopBtn, QPushButton#DiscoveryStopBtn, QPushButton#PortStopBtn {
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingStopBtn:hover, QPushButton#DiscoveryStopBtn:hover, QPushButton#PortStopBtn:hover {{
+QPushButton#PingStopBtn:hover, QPushButton#DiscoveryStopBtn:hover, QPushButton#PortStopBtn:hover, QPushButton#DnsStopBtn:hover {{
     background-color: {t["danger_hover"]};
 }}
 
-QPushButton#PingStopBtn:disabled, QPushButton#DiscoveryStopBtn:disabled, QPushButton#PortStopBtn:disabled {{
+QPushButton#PingStopBtn:disabled, QPushButton#DiscoveryStopBtn:disabled, QPushButton#PortStopBtn:disabled, QPushButton#DnsStopBtn:disabled {{
     background-color: {t["border"]};
     color: {t["text_secondary"]};
 }}
 
-QPushButton#PingClearBtn, QPushButton#DiscoveryClearBtn, QPushButton#DiscoveryRefreshBtn, QPushButton#PortClearBtn {{
+QPushButton#PingClearBtn, QPushButton#DiscoveryClearBtn, QPushButton#DiscoveryRefreshBtn, QPushButton#PortClearBtn, QPushButton#DnsClearBtn {{
     background-color: transparent;
     color: {t["text_secondary"]};
     border: 1px solid {t["border"]};
@@ -346,12 +346,12 @@ QPushButton#PingClearBtn, QPushButton#DiscoveryClearBtn, QPushButton#DiscoveryRe
     font-family: 'Segoe UI', sans-serif;
 }}
 
-QPushButton#PingClearBtn:hover, QPushButton#DiscoveryClearBtn:hover, QPushButton#DiscoveryRefreshBtn:hover, QPushButton#PortClearBtn:hover {{
+QPushButton#PingClearBtn:hover, QPushButton#DiscoveryClearBtn:hover, QPushButton#DiscoveryRefreshBtn:hover, QPushButton#PortClearBtn:hover, QPushButton#DnsClearBtn:hover {{
     background-color: {t["surface_hover"]};
     color: {t["text_primary"]};
 }}
 
-QLabel#PingFeedbackLabel, QLabel#DiscoveryStatusLabel, QLabel#PortStatusLabel {{
+QLabel#PingFeedbackLabel, QLabel#DiscoveryStatusLabel, QLabel#PortStatusLabel, QLabel#DnsStatusLabel {{
     color: {t["text_secondary"]};
     font-size: 12px;
     font-family: 'Segoe UI', sans-serif;
